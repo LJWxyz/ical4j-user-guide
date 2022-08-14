@@ -4,6 +4,9 @@ This page provides examples of using the iCal4j model to build iCalendar objects
 
 ## Creating a new calendar
 
+    //both fluent and non fluent need this.
+    import net.fortuna.ical4j.model.Calendar;
+    
     Calendar calendar = new Calendar();
     calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
     calendar.getProperties().add(Version.VERSION_2_0);
@@ -50,12 +53,13 @@ The recent addition of a fluent API means we can also write the above example mo
 
 Using fluent API:
 
-    ...
+    //assume created the calendar as above eg...
 
+    //for example if we use java.time.LocalDate.now() for our local machine time.when running this code.
     net.fortuna.ical4j.model.Calendar cal = new net.fortuna.ical4j.model.Calendar()
-        .withComponent(
-            new VEvent(new Date(calendar.getTime()), "Christmas Day")
-                .withProperty(ug.generateUid()).getFluentTarget()).getFluentTarget();
+    .withComponent(
+        new net.fortuna.ical4j.model.component.VEvent(java.time.LocalDate.now(), "Christmas Day")
+            .withProperty(ug.generateUid()).getFluentTarget()).getFluentTarget();
 
 Output:
 
